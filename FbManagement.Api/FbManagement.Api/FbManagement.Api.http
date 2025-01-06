@@ -1,0 +1,6 @@
+@FbManagement.Api_HostAddress = http://localhost:5196
+
+GET {{FbManagement.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
