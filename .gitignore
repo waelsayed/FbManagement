@@ -1,0 +1,10 @@
+.vs/
+.github/
+FbManagement.Api/obj/
+FbManagement.Api/bin/
+FbManagement.Application/obj/
+FbManagement.Application/bin/
+FbManagement.Domain/obj/
+FbManagement.Domain/bin/
+FbManagement.Infrastructure/obj/
+FbManagement.Infrastructure/bin/
