@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FbManagement.Domain\FbManagement.Domain.csproj" />
-    <ProjectReference Include="..\FbManagement.Infrastructure\FbManagement.Infrastructure.csproj" />
+   
   </ItemGroup>
 
 </Project>

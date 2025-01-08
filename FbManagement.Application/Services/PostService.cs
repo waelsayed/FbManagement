@@ -1,6 +1,6 @@
 ﻿using FbManagement.Application.Dtos;
 using FbManagement.Application.Interfaces;
-using FbManagement.Infrastructure.FacebookApi;
+
 
 namespace FbManagement.Application.Services
 {

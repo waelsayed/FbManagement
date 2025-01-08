@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FbManagement.Application\FbManagement.Application.csproj" />
+    <ProjectReference Include="..\FbManagement.Infrastructure\FbManagement.Infrastructure.csproj" />
+    
   </ItemGroup>
 
 </Project>
