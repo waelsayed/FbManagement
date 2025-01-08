@@ -1,8 +1,8 @@
 ﻿namespace FbManagement.Domain.Entities
 {
-    public class User
+    public class from
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public string id { get; set; }
+        public string name { get; set; }
     }
 }

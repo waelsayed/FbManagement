@@ -10,7 +10,7 @@ namespace FbManagement.Application.Interfaces
 {
     public interface ICommentsService
     {
-        Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(string postId);
-        Task<IEnumerable<Post>> GetPostsWithCommentsInPeriodAsync(string since, string until, int limit = 25);
+        Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(string pageId, string postId);
+        Task<IEnumerable<Post>> GetPostsWithCommentsInPeriodAsync(string pageId, string since, string until, int limit = 25);
     }
 }

@@ -1,6 +1,8 @@
 
 using FbManagement.Application.Interfaces;
+using FbManagement.Application.Services;
 using FbManagement.Infrastructure.FacebookApi;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FbManagement.Api
 {
@@ -12,9 +14,9 @@ namespace FbManagement.Api
 
             // configuration
             // Get Facebook API configuration from appsettings.json
-            var facebookConfig = builder.Configuration.GetSection("FacebookApi");
-            var accessToken = facebookConfig["AccessToken"];
-            var apiVersion = facebookConfig["ApiVersion"];
+            //var facebookConfig = builder.Configuration.GetSection("Facebook");
+            //var accessToken = facebookConfig["AccessToken"];
+            //var apiVersion = facebookConfig["ApiVersion"];
 
 
             // Add services to the container.
@@ -22,16 +24,51 @@ namespace FbManagement.Api
             builder.Services.AddControllers();
 
             builder.Services.AddScoped<ICommentsService, CommentsService>();
-            builder.Services.AddScoped<IFacebookApiClient, FacebookApiClient>();
 
-            builder.Services.AddHttpClient<IFacebookApiClient, FacebookApiClient>(client =>
+            builder.Services.AddHttpClient<IFacebookApiClient, FacebookApiClient>((sp, client) =>
             {
+                var configuration = sp.GetRequiredService<IConfiguration>();
+                var accessToken = configuration["FacebookApi:AccessToken"];
+                var apiVersion = configuration["FacebookApi:ApiVersion"];
+                client.BaseAddress = new Uri($"https://graph.facebook.com/{apiVersion}");
+            });
+
+            //builder.Services.AddHttpClient<IFacebookApiClient, FacebookApiClient>(client =>
+            //{
+            //    client.BaseAddress = new Uri("https://graph.facebook.com/");
+
+            //}).AddHttpMessageHandler(() => new FacebookApiClientHandler(accessToken, apiVersion)); // Ensure configuration is passed
+
+
+            // Register FacebookApiClient with HttpClient
+            // Register FacebookApiClient with HttpClient
+            //builder.Services.AddHttpClient<IFacebookApiClient, FacebookApiClient>(client =>
+            //{
+            //    client.BaseAddress = new Uri("https://graph.facebook.com/");
+            //}).AddHttpMessageHandler(sp =>
+            //{
+            //    var configuration = sp.GetRequiredService<IConfiguration>();
+            //    var accessToken = configuration["FacebookApi:AccessToken"];
+            //    var apiVersion = configuration["FacebookApi:ApiVersion"];
+
+            //    if (string.IsNullOrEmpty(accessToken) || string.IsNullOrEmpty(apiVersion))
+            //    {
+            //        throw new InvalidOperationException("Facebook API configuration is missing.");
+            //    }
+
+            //    return new FacebookApiClient(client,accessToken, apiVersion);
+            //});
+
+            builder.Services.AddHttpClient<IFacebookApiClient, FacebookApiClient>((serviceProvider, client) =>
+            {
+                var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+                var accessToken = configuration["FacebookApi:AccessToken"];
+                var apiVersion = configuration["FacebookApi:ApiVersion"];
+
                 client.BaseAddress = new Uri("https://graph.facebook.com/");
-            }).ConfigureHttpClient((provider, client) =>
-            {
-                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
-            }).AddTypedClient((httpClient, sp) => new FacebookApiClient(httpClient, accessToken, apiVersion));
 
+                // Use serviceProvider to resolve other dependencies if necessary
+            }).ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler());
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

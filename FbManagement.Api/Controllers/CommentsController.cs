@@ -13,12 +13,12 @@ namespace FbManagement.Api.Controllers
         {
             _commentsService = commentsService;
         }
-        [HttpGet("{postId}/comments")]
-        public async Task<IActionResult> GetCommentsByPostIdAsync(string postId)
+        [HttpGet("{pageId}/{postId}/comments")]
+        public async Task<IActionResult> GetCommentsByPostIdAsync(string pageId , string postId)
         {
             try
             {
-                var comments = await _commentsService.GetCommentsByPostIdAsync(postId);
+                var comments = await _commentsService.GetCommentsByPostIdAsync(pageId,postId);
                 return Ok(comments);
             }
             catch (Exception ex)

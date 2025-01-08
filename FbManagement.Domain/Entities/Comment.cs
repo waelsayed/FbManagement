@@ -2,9 +2,9 @@
 {
     public class Comment
     {
-        public string Id { get; set; }
-        public string Message { get; set; }
-        public User From { get; set; }
-        public string CreatedTime { get; set; }
+        public string id { get; set; }
+        public string message { get; set; }
+        public from from { get; set; } // user
+        public string created_time { get; set; }
     }
 }

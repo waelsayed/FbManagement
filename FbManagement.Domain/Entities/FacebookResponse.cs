@@ -2,7 +2,7 @@
 {
     public class FacebookResponse<T>
     {
-        public List<T> Data { get; set; }
-        public PagingInfo Paging { get; set; }
+        public List<T> data { get; set; }
+        public PagingInfo paging { get; set; }
     }
 }

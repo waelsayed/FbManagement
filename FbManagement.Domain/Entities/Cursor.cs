@@ -2,7 +2,7 @@
 {
     public class Cursor
     {
-        public string After { get; set; }
-        public string Before { get; set; }
+        public string after { get; set; }
+        public string before { get; set; }
     }
 }

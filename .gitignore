@@ -8,3 +8,4 @@ FbManagement.Domain/obj/
 FbManagement.Domain/bin/
 FbManagement.Infrastructure/obj/
 FbManagement.Infrastructure/bin/
+FbManagement.Api/appsettings.json
